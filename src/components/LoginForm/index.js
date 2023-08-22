@@ -1,4 +1,5 @@
 import {Component} from 'react'
+
 import Cookies from 'js-cookie'
 
 import {Redirect} from 'react-router-dom'
@@ -9,7 +10,9 @@ class LoginForm extends Component {
   state = {username: '', password: '', ErrorMsg: '', isFact: false}
 
   onSuccess = JwtToken => {
-    Cookies.set('jwt_token', JwtToken, {expires: 45})
+    const {history} = this.props
+    Cookies.set('jwt_token', JwtToken, {expires: 30})
+    history.replace('/')
   }
 
   onFailure = ErrorMsg => {
